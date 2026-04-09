@@ -22,7 +22,7 @@ public class StudentDemo07 {
             String studentClass = scanner.nextLine();
 
             System.out.print("GPA: ");
-            double gpa = scanner.nextDouble();
+            double gpa = Double.parseDouble(scanner.nextLine());
 
             topStudents.add(new Student07(nim, name, studentClass, gpa));
         }
@@ -31,7 +31,7 @@ public class StudentDemo07 {
         topStudents.print();
 
         topStudents.insertionSort();
-        System.out.println("Sorted student list (by GPA, ascending) using Insertion Sort:");
+        System.out.println("Sorted student list (by GPA, descending) using Insertion Sort:");
         topStudents.print();
 
         scanner.close();

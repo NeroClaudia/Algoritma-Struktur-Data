@@ -52,7 +52,7 @@ public class TopStudent07 {
             Student07 temp = listStudents[i];
             int j = i;
 
-            while (j > 0 && listStudents[j - 1].gpa > temp.gpa) {
+            while (j > 0 && listStudents[j - 1].gpa < temp.gpa) {
                 listStudents[j] = listStudents[j - 1];
                 j--;
             }
