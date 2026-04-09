@@ -1,6 +1,11 @@
 public class SearchStudents {
-    Students[] listStd = new Students[5];
+    Students[] listStd;
     int idx;
+
+    public SearchStudents(int size) {
+        listStd = new Students[size];
+        idx = 0;
+    }
 
     public void add(Students std) {
         if (idx < listStd.length) {

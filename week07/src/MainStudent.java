@@ -4,8 +4,10 @@ public class MainStudent {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        SearchStudents data = new SearchStudents();
-        int amountStudent = 5;
+        System.out.print("Input the amount of the student: ");
+        int amountStudent = Integer.parseInt(scanner.nextLine());
+
+        SearchStudents data = new SearchStudents(amountStudent);
 
         System.out.println("-------------------------------------");
         System.out.println("Input student data accordingly from smallest NIM");
