@@ -1,13 +1,31 @@
+import java.util.Scanner;
+
 public class StudentDemo07 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        TopStudent07 topStudents = new TopStudent07(5);
+        System.out.print("Masukkan jumlah siswa: ");
+        int n = Integer.parseInt(scanner.nextLine());
 
-        topStudents.add(new Student07("2201", "Alice", "A", 3.9));
-        topStudents.add(new Student07("2202", "Bob", "B", 3.7));
-        topStudents.add(new Student07("2203", "Charlie", "C", 3.8));
-        topStudents.add(new Student07("2204", "David", "D", 3.6));
-        topStudents.add(new Student07("2205", "Eve", "E", 4.0));
+        TopStudent07 topStudents = new TopStudent07(n);
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("===== DATA MAHASISWA KE-" + (i + 1));
+
+            System.out.print("NIM: ");
+            String nim = scanner.nextLine();
+
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Student Class: ");
+            String studentClass = scanner.nextLine();
+
+            System.out.print("GPA: ");
+            double gpa = scanner.nextDouble();
+
+            topStudents.add(new Student07(nim, name, studentClass, gpa));
+        }
 
         System.out.println("Original student list:");
         topStudents.print();
@@ -15,5 +33,7 @@ public class StudentDemo07 {
         topStudents.insertionSort();
         System.out.println("Sorted student list (by GPA, ascending) using Insertion Sort:");
         topStudents.print();
+
+        scanner.close();
     }
 }
