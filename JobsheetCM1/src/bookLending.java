@@ -2,11 +2,7 @@ public class bookLending {
 
     Student sdt;
     Book book;
-    int loanPeriod, loanLimit, overdue, fine;
-
-    public bookLending() {
-
-    }
+    int loanPeriod, overdue, fine;
 
     public bookLending(Student sdt, Book book, int loanPeriod) {
         this.sdt = sdt;

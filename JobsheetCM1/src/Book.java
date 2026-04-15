@@ -3,10 +3,6 @@ public class Book {
     String code, title, status;
     int year;
 
-    public Book() {
-
-    }
-
     public Book(String code, String title, int year) {
         this.code = code;
         this.title = title;

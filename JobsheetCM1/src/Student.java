@@ -2,10 +2,6 @@ public class Student {
 
     String nim, name, study_program;
 
-    public Student() {
-
-    }
-
     public Student(String nim, String name, String study_program) {
         this.nim = nim;
         this.name = name;
