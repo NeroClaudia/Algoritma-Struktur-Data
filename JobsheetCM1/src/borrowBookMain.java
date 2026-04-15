@@ -3,66 +3,126 @@ import java.util.Scanner;
 public class borrowBookMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Student[] students = {
-                new Student("22001", "Andi", "Informatics Engineering"),
-                new Student("22002", "Budi", "Informatics Engineering"),
-                new Student("22003", "Citra", "Business Information System")
-        };
 
-        Book[] books = {
-                new Book("B001", "Algorithm", 2020),
-                new Book("B002", "Database", 2019),
-                new Book("B003", "Programming", 2021),
-                new Book("B004", "Physics", 2024)
-        };
-
-        bookLending[] lendings = {
-                new bookLending(students[0], books[0], 7),
-                new bookLending(students[1], books[1], 3),
-                new bookLending(students[2], books[2], 10),
-                new bookLending(students[2], books[3], 6),
-                new bookLending(students[0], books[1], 4),
-        };
+        Student[] students = null;
+        Book[] books = null;
+        bookLending[] lendings = null;
 
         boolean running = true;
         int input;
         do {
             System.out.println("=== JTI LIBRARY BORROWING SYSTEM ===");
-            System.out.println("1. Display Students");
-            System.out.println("2. Display Books");
-            System.out.println("3. Display Borrowing");
-            System.out.println("4. Sort by Fines");
-            System.out.println("5. Search by Student ID");
+            System.out.println("1. Input Student Data");
+            System.out.println("2. Input Books Data");
+            System.out.println("3. Input Book Lending");
+            System.out.println("4. Display Students");
+            System.out.println("5. Display Books");
+            System.out.println("6. Display Borrowing");
+            System.out.println("7. Sort by Fines");
+            System.out.println("8. Search by Student ID");
             System.out.println("0. Exit");
 
-            System.out.print("Select: ");
+            System.out.print("Select Menu: ");
             input = Integer.parseInt(scanner.nextLine());
 
             switch (input) {
 
                 case 1:
+                    System.out.print("Input the amout of student: ");
+                    int s = Integer.parseInt(scanner.nextLine());
+                    students = new Student[s];
+
+                    for (int i = 0; i < students.length; i++) {
+                        System.out.println("Student no-" + (i + 1));
+                        System.out.print("Input NIM: ");
+                        String nim = scanner.nextLine();
+
+                        System.out.print("Input Name: ");
+                        String name = scanner.nextLine();
+
+                        System.out.print("Input Study Program: ");
+                        String prodi = scanner.nextLine();
+
+                        students[i] = new Student(nim, name, prodi);
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Input the amount of books: ");
+                    int b = Integer.parseInt(scanner.nextLine());
+                    books = new Book[b];
+
+                    for (int i = 0; i < books.length; i++) {
+                        System.out.println("Book no-" + (i + 1));
+                        System.out.print("Input Book Code: ");
+                        String code = scanner.nextLine();
+
+                        System.out.print("Input Book Title: ");
+                        String title = scanner.nextLine();
+
+                        System.out.print("Input Book Year: ");
+                        int year = Integer.parseInt(scanner.nextLine());
+
+                        books[i] = new Book(code, title, year);
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Input the Amount of Lending: ");
+                    int l = Integer.parseInt(scanner.nextLine());
+                    lendings = new bookLending[l];
+                    for (int i = 0; i < lendings.length; i++) {
+                        System.out.println("Lending " + (i + 1));
+                        System.out.print("Student Name: ");
+                        String stdName = scanner.nextLine();
+
+                        System.out.print("Book Title: ");
+                        String bookTitle = scanner.nextLine();
+
+                        System.out.print("Loan Period (days): ");
+                        int days = Integer.parseInt(scanner.nextLine());
+
+                        Student foundStudent = null;
+                        Book foundBook = null;
+
+                        for (Student st : students)
+                            if (st.name.equals(stdName))
+                                foundStudent = st;
+                        for (Book bk : books)
+                            if (bk.title.equals(bookTitle))
+                                foundBook = bk;
+
+                        if (foundStudent != null && foundBook != null) {
+                            lendings[i] = new bookLending(foundStudent, foundBook, days);
+                        } else {
+                            System.out.println("Student or book not found");
+                            i--;
+                        }
+                    }
+                    break;
+                case 4:
                     for (int i = 0; i < students.length; i++) {
                         students[i].printStudent();
                     }
                     break;
-                case 2:
+                case 5:
                     for (int i = 0; i < books.length; i++) {
                         books[i].printBook();
                     }
                     break;
-                case 3:
+                case 6:
                     for (int i = 0; i < lendings.length; i++) {
                         lendings[i].printLending();
                     }
                     break;
-                case 4:
+                case 7:
                     fineSorting sort = new fineSorting(lendings, lendings.length);
                     sort.selectionSort();
                     for (int i = 0; i < lendings.length; i++) {
                         lendings[i].printLending();
                     }
                     break;
-                case 5:
+                case 8:
                     System.out.print("Enter NIM: ");
                     String nim = scanner.nextLine();
 
