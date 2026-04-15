@@ -21,4 +21,33 @@ public class fineSorting {
             lendings[i] = temp;
         }
     }
+
+    public void bubbleSort() {
+        for (int i = 0; i < size; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < size - i - 1; j++) {
+                if (lendings[j].fine > lendings[j + 1].fine) {
+                    bookLending temp = lendings[j];
+                    lendings[j] = lendings[j + 1];
+                    lendings[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
+        }
+    }
+
+    public void inseertionSort() {
+        for (int i = 1; i < size; i++) {
+            bookLending key = lendings[i];
+            int j = i - 1;
+
+            while (j >= 0 && lendings[j].fine < key.fine) {
+                lendings[j + 1] = lendings[j];
+                j--;
+            }
+            lendings[j + 1] = key;
+        }
+    }
 }
