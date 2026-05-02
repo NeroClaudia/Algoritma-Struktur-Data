@@ -86,4 +86,14 @@ public class StudentAssignmentStack {
         }
         return binary;
     }
+
+    public int countStudent() {
+        int count = 0;
+        for (int i = 0; i <= top; i++) {
+            if (!stack[i].isProcessed) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
