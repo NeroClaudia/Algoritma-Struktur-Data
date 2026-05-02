@@ -14,6 +14,7 @@ public class StudentDemo07 {
             System.out.println("3. View Top Assignment");
             System.out.println("4. View All Assignments");
             System.out.println("5. Show the first student who submitted");
+            System.out.println("6. Count student");
 
             System.out.print("Choose a menu: ");
             pilih = Integer.parseInt(scanner.nextLine());
@@ -66,8 +67,13 @@ public class StudentDemo07 {
                         System.out.println("The first submitted comes from " + bottom.name);
                     }
                     break;
+                    
+                case 6:
+                    int total = stack.countStudent();
+                    System.out.println("Total student currently in stack is " + total);
+                    break;
             }
-        } while (pilih >= 1 && pilih <= 5);
+        } while (pilih >= 1 && pilih <= 6);
 
         scanner.close();
     }
