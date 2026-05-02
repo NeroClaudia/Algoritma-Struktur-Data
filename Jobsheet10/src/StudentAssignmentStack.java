@@ -10,23 +10,22 @@ public class StudentAssignmentStack {
     }
 
     public boolean isFull() {
-        if (top == size - 1) {
-            return true;
-        } else {
-            return false;
+        int count = 0;
+        for (int i = 0; i <= top; i++) {
+            if (!stack[i].isProcessed) count++;
         }
+        return count == size;
     }
 
     public boolean isEmpty() {
-        if (top == -1) {
-            return true;
-        } else {
-            return false;
+        for (int i = 0; i <= top; i++) {
+            if (!stack[i].isProcessed) return false;
         }
+        return true;
     }
 
     public void push(Student07 std) {
-        if (!isFull()) {
+        if (top < size - 1) {
             top++;
             stack[top] = std;
         } else {
@@ -35,23 +34,34 @@ public class StudentAssignmentStack {
     }
 
     public Student07 pop() {
-        if (!isEmpty()) {
-            Student07 std = stack[top];
-            top--;
-            return std;
-        } else {
-            System.out.println("There is no data in stack!");
-            return null;
+        for (int i = top; i >= 0; i--) {
+            if (!stack[i].isProcessed) {
+                stack[i].isProcessed = true;
+                return stack[i];
+            }
         }
+        System.out.println("There is no data in stack!");
+        return null;
     }
 
     public Student07 peek() {
-        if (!isEmpty()) {
-            return stack[top];
-        } else {
-            System.out.println("There is no data in stack!");
-            return null;
+        for (int i = top; i >= 0; i--) {
+            if (!stack[i].isProcessed) {
+                return stack[i];
+            }
         }
+        System.out.println("There is no data in stack!");
+        return null;
+    }
+
+    public Student07 peekBottom() {
+        for (int i = 0; i <= top; i ++) {
+            if (!stack[i].isProcessed) {
+                return stack[i];
+            }
+        }
+        System.out.println("There is no data in stack!");
+        return null;
     }
 
     public void print() {

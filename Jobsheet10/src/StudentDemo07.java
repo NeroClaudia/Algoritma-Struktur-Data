@@ -13,6 +13,7 @@ public class StudentDemo07 {
             System.out.println("2. Grade Assignment");
             System.out.println("3. View Top Assignment");
             System.out.println("4. View All Assignments");
+            System.out.println("5. Show the first student who submitted");
 
             System.out.print("Choose a menu: ");
             pilih = Integer.parseInt(scanner.nextLine());
@@ -58,8 +59,15 @@ public class StudentDemo07 {
                 case 4:
                     stack.print();
                     break;
+
+                case 5:
+                    Student07 bottom = stack.peekBottom();
+                    if (bottom != null) {
+                        System.out.println("The first submitted comes from " + bottom.name);
+                    }
+                    break;
             }
-        } while (pilih >= 1 && pilih <= 4);
+        } while (pilih >= 1 && pilih <= 5);
 
         scanner.close();
     }
