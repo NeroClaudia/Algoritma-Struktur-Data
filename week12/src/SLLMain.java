@@ -1,33 +1,64 @@
+import java.util.Scanner;
+
 public class SLLMain {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
         SingleLinkedList00 sll = new SingleLinkedList00();
+        int menu;
 
-        Student00 std1 = new Student00("001", "Student 1", "TI-1I", 3.89);
-        Student00 std2 = new Student00("002", "Student 2", "TI-1I", 3.45);
-        Student00 std3 = new Student00("003", "Student 3", "TI-1I", 3.20);
-        Student00 std4 = new Student00("004", "Student 4", "TI-1I", 3.00);
+        do {
+            System.out.println("===== MENU =====");
+            System.out.println("1. Add First Data at the beginning");
+            System.out.println("2. Add Last Data at the end");
+            System.out.println("3. Insert Data");
+            System.out.println("4. Cetak Data");
+            System.out.println("5. Remove First Data");
+            System.out.println("0. Exit");
 
-        sll.print();
-        sll.addFirst(std4);
-        sll.print();
-        sll.addLast(std1);
-        sll.print();
-        sll.insertAfter(std3, "Student 4");
-        sll.insertAt(2, std2);
-        sll.print();
+            System.out.print("Select Menu: ");
+            menu = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Data at index 1 is:");
-        Student00 data = sll.getData(1);
-        data.print();
+            if (menu >= 1 && menu <= 3) {
+                System.out.print("Add NIM: ");
+                String nim = scanner.nextLine();
 
-        int idx = sll.indexOf("Student 1");
-        System.out.println("Student 1 is located at index: " + idx);
+                System.out.print("Add Name: ");
+                String name = scanner.nextLine();
 
-        sll.removeFirst();
-        sll.removeLast();
-        sll.print();
-        sll.removeAt(0);
-        sll.print();
+                System.out.print("Add Class Name: ");
+                String classN = scanner.nextLine();
+
+                System.out.print("Add GPA: ");
+                double ipk = Double.parseDouble(scanner.nextLine());
+
+                Student00 siswa = new Student00(nim, name, classN, ipk);
+
+                if (menu == 1) {
+                    sll.addFirst(siswa);
+                    System.out.println("Data successfully added at the beginning\n");
+                } else if (menu == 2) {
+                    sll.addLast(siswa);
+                    System.out.println("Data successfully added at the end!\n");
+                } else if (menu == 3) {
+                    System.out.print("Enter the Student Name as a reference (insert after): ");
+                    String keyName = scanner.nextLine();
+                    sll.insertAfter(siswa, keyName);
+                    System.out.println("Data was successfully inserted after " + keyName + "!\n");
+                }
+            } else if (menu == 4) {
+                sll.print();
+                System.out.println();
+            } else if (menu == 5) {
+                sll.removeFirst();
+                System.out.println("The first data was successfully deleted!\n");
+            } else if (menu == 0) {
+                System.out.println("The program has finished running");
+            } else {
+                System.out.println("Invalid Input");
+            }
+        } while (menu != 0);
+
+        scanner.close();
     }
 }
