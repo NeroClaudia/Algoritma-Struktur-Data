@@ -1,10 +1,12 @@
 public class DoubleLinkedLists {
 
     Node head, tail;
+    int size;
 
     DoubleLinkedLists() {
         head = null;
         tail = null;
+        size = 0;
     }
 
     boolean isEmpty() {
@@ -20,6 +22,7 @@ public class DoubleLinkedLists {
             head.prev = newNode;
             head = newNode;
         }
+        size++;
     }
 
     void addLast(Student data) {
@@ -31,6 +34,7 @@ public class DoubleLinkedLists {
             newNode.prev = tail;
             tail = newNode;
         }
+        size++;
     }
 
     void insertAfter(String key, Student data) {
@@ -48,6 +52,7 @@ public class DoubleLinkedLists {
                     newNode.prev = temp;
                     temp.next.prev = newNode;
                     temp.next = newNode;
+                    size++;
                 }
             }
             temp = temp.next;
@@ -62,9 +67,11 @@ public class DoubleLinkedLists {
             System.out.println("Double linked list is currently empty!");
         }else if (head == tail) {
             head = tail = null;
+            size--;
         }else {
             head = head.next;
             head.prev = null;
+            size--;
         }
     }
 
@@ -73,30 +80,37 @@ public class DoubleLinkedLists {
             System.out.println("Double linked list is currently empty!");
         } else if (head.next == null) {
             head = null;
+            size--;
         } else {
             Node temp = head;
             while (temp.next != null) {
                 temp = temp.next;
             }
             temp.prev.next = null;
+            size--;
         }
     }
 
     void remove(int index) {
         if (isEmpty()) {
             System.out.println("Double linked list is currently empty!");
-        }else if (index == 0) {
+        } else if (index < 0) {
+            System.out.println("Removal failed. Index (" + index + ") cannot be negative!");
+        } else if (index >= size) {
+            System.out.println("Removal failed. Index (" + index + ") exceeds list size (" + size + ")!");
+        } else if (index == 0) {
             removeFirst();
-        }else {
+        } else {
             Node temp = head;
             for (int i = 0; i < index; i++) {
                 temp = temp.next;
             }
             if (temp == tail) {
                 removeLast();
-            }else {
+            } else {
                 temp.prev.next = temp.next;
                 temp.next.prev = temp.prev;
+                size--;
             }
         }
     }
