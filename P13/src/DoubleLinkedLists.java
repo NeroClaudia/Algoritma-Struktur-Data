@@ -36,9 +36,11 @@ public class DoubleLinkedLists {
     void insertAfter(String key, Student data) {
         Node newNode = new Node(data);
         Node temp = head;
+        boolean found = false;
 
         while (temp != null) {
             if (temp.data.nim.equalsIgnoreCase(key)) {
+                found = true;
                 if (temp == tail) {
                     addLast(data);
                 } else {
@@ -50,7 +52,7 @@ public class DoubleLinkedLists {
             }
             temp = temp.next;
         }
-        if (temp == null) {
+        if (!found) {
             System.out.println("Insertion failed. Data (" + key + ") not found!!");
         }
     }
@@ -69,11 +71,14 @@ public class DoubleLinkedLists {
     void removeLast() {
         if (isEmpty()) {
             System.out.println("Double linked list is currently empty!");
-        }else if (head == tail) {
-            head = tail = null;
-        }else {
-            tail = tail.prev;
-            tail.next = null;
+        } else if (head.next == null) { 
+            head = null;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.prev.next = null;
         }
     }
 
