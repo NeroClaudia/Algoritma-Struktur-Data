@@ -71,7 +71,7 @@ public class DoubleLinkedLists {
     void removeLast() {
         if (isEmpty()) {
             System.out.println("Double linked list is currently empty!");
-        } else if (head.next == null) { 
+        } else if (head.next == null) {
             head = null;
         } else {
             Node temp = head;
