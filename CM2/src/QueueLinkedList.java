@@ -55,6 +55,35 @@ public class QueueLinkedList {
         return temp;
     }
 
+    void searchBuyer(int key) {
+        if (isEmpty()) {
+            System.out.println("Queue is Empty");
+            return;
+        }
+        QueueNode current = head;
+        boolean found = false;
+
+        System.out.println("=====================================");
+        System.out.println("HASIL PENCARIAN PEMBELI");
+        System.out.println("=====================================");
+        System.out.printf("%-15s %-20s %-15s%n", "No Antrian", "Nama", "No HP");
+
+        while (current != null) {
+            if (current.buyer.queueNumber == key) {
+                System.out.printf("%-15s %-20s %-15s%n", 
+                    current.buyer.queueNumber,
+                    current.buyer.name,
+                    current.buyer.mobileNumber);
+                found = true;
+                break;
+            }
+            current = current.next;
+        }
+
+        if (!found) {
+            System.out.println("Data pembeli dengan nomor antrian '" + key + "' tidak ditemukan.");
+        }
+    }
     void displayQueue() {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
