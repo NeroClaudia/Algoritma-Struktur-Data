@@ -13,6 +13,8 @@ public class RestaurantMain {
             System.out.println("2. Print Queue");
             System.out.println("3. Remove Queue and Messages");
             System.out.println("4. Order Report");
+            System.out.println("5. Remove Item");
+            System.out.println("6. Search Buyer by Queue Number");
             System.out.println("0. Exit");
 
             System.out.print("Select Menu: ");
@@ -58,6 +60,13 @@ public class RestaurantMain {
 
                 case 4:
                     queue.displayReport();
+                    break;
+
+                case 5:
+                    System.out.print("Masukkan nama pesanan yang ingin dihapus: ");
+                    String batal = scanner.nextLine();
+                    
+                    served.order.removeItem(batal);
                     break;
 
                 case 0:
