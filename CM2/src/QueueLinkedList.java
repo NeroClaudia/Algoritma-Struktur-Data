@@ -28,21 +28,24 @@ public class QueueLinkedList {
         queueCount++;
     }
 
-    QueueNode dequeue(int index) {
+    QueueNode dequeue(String orderCode) {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
             return null;
         }
         QueueNode temp = head;
-        int currentIndex = 0;
+        boolean found = false;
 
-        while (temp != null && currentIndex < index) {
+        while (temp != null) {
+            if (temp.order != null && temp.order.head != null && temp.order.head.orderCode.equalsIgnoreCase(orderCode)) {
+                found = true;
+                break;
+            }
             temp = temp.next;
-            currentIndex++;
         }
 
-        if (temp == null) {
-            System.out.println("Index tidak ditemukan");
+        if (!found || temp == null) {
+            System.out.println("Pelanggan dengan Kode Pesanan '" + orderCode + "' tidak ditemukan di antrian aktif.");
             return null;
         }
 
