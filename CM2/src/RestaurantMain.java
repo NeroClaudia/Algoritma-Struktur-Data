@@ -15,8 +15,6 @@ public class RestaurantMain {
             System.out.println("2. Print Queue");
             System.out.println("3. Remove Queue and Messages");
             System.out.println("4. Order Report");
-            System.out.println("5. Remove Item");
-            System.out.println("6. Search Buyer by Queue Number");
             System.out.println("0. Exit");
 
             System.out.print("Select Menu: ");
@@ -46,9 +44,9 @@ public class RestaurantMain {
                 case 3:
                     queue.displayQueue();
                     System.out.print("Masukkan index yang ingin dihapus: ");
-                    int tagetIndex = Integer.parseInt(scanner.nextLine());
+                    String targetCode = scanner.nextLine();
 
-                    served = queue.dequeue(tagetIndex);
+                    served = queue.dequeue(targetCode);
                     
                     if (served != null) {
                         System.out.print("Order Code: ");
@@ -69,23 +67,6 @@ public class RestaurantMain {
                     double totalBelanja = served.order.calculateTotal();
                     System.out.println("Total price for all orders: " + totalBelanja);
                     queue.displayReport();
-                    break;
-
-                case 5:
-                    if (served != null) {
-                        System.out.print("Masukkan nama pesanan yang ingin dihapus: ");
-                        String batal = scanner.nextLine();
-
-                        served.order.removeItem(batal);
-                    }else {
-                        System.out.println("Belum ada pelanggan yang dilayani");
-                    }
-                    break;
-
-                case 6:
-                    System.out.print("Masukkan No Antrian yang dicari: ");
-                    int nomor = Integer.parseInt(scanner.nextLine());
-                    queue.searchBuyer(nomor);
                     break;
 
                 case 0:
