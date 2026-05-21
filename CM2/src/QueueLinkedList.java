@@ -28,18 +28,36 @@ public class QueueLinkedList {
         queueCount++;
     }
 
-    QueueNode dequeue() {
+    QueueNode dequeue(int index) {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
             return null;
         }
         QueueNode temp = head;
-        head = head.next;
+        int currentIndex = 0;
 
-        if (head != null) {
-            head.prev = null;
-        }else {
+        while (temp != null && currentIndex < index) {
+            temp = temp.next;
+            currentIndex++;
+        }
+
+        if (temp == null) {
+            System.out.println("Index tidak ditemukan");
+            return null;
+        }
+
+        if (temp == head && temp == tail) {
+            head = null;
             tail = null;
+        }else if (temp == head) {
+            head = head.next;
+            head.prev = null;
+        }else if (temp == tail) {
+            tail = tail.prev;
+            tail.next = null;
+        }else {
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
         }
 
         temp.next = null;
@@ -84,6 +102,7 @@ public class QueueLinkedList {
             System.out.println("Data pembeli dengan nomor antrian '" + key + "' tidak ditemukan.");
         }
     }
+
     void displayQueue() {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
@@ -162,13 +181,18 @@ public class QueueLinkedList {
         System.out.println("===================================");
         System.out.printf("%-15s %-20s %-10s%n", "Kode Pesanan", "Nama Pesanan", "Harga");
 
+        double totalPendapatanAll = 0;
         OrderNode current = sortHead;
         while (current != null) {
             System.out.printf("%-15s %-20s %-10d%n",
                 current.orderCode,
                 current.orderName,
                 (int) current.price);
+            
+            totalPendapatanAll += current.price;
             current = current.next;
         }
+        System.out.println("===================================");
+        System.out.println("TOTAL PENDAPATAN RESTORAN: " + totalPendapatanAll);
     }
 }
