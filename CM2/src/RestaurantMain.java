@@ -4,11 +4,13 @@ public class RestaurantMain {
         Scanner scanner = new Scanner(System.in);
         QueueLinkedList queue = new QueueLinkedList();
 
+        QueueNode served = null;
+        
         int choice;
         do {
-            System.out.println("================================");
+            System.out.println("===================================");
             System.out.println("ROYAL DELISH QUEUE SYSTEM");
-            System.out.println("================================");
+            System.out.println("===================================");
             System.out.println("1. Add Queue");
             System.out.println("2. Print Queue");
             System.out.println("3. Remove Queue and Messages");
@@ -42,7 +44,12 @@ public class RestaurantMain {
                     break;
 
                 case 3:
-                    QueueNode served = queue.dequeue();
+                    queue.displayQueue();
+                    System.out.print("Masukkan index yang ingin dihapus: ");
+                    int tagetIndex = Integer.parseInt(scanner.nextLine());
+
+                    served = queue.dequeue(tagetIndex);
+                    
                     if (served != null) {
                         System.out.print("Order Code: ");
                         String orderCode = scanner.nextLine();
@@ -59,14 +66,26 @@ public class RestaurantMain {
                     break;
 
                 case 4:
+                    double totalBelanja = served.order.calculateTotal();
+                    System.out.println("Total price for all orders: " + totalBelanja);
                     queue.displayReport();
                     break;
 
                 case 5:
-                    System.out.print("Masukkan nama pesanan yang ingin dihapus: ");
-                    String batal = scanner.nextLine();
-                    
-                    served.order.removeItem(batal);
+                    if (served != null) {
+                        System.out.print("Masukkan nama pesanan yang ingin dihapus: ");
+                        String batal = scanner.nextLine();
+
+                        served.order.removeItem(batal);
+                    }else {
+                        System.out.println("Belum ada pelanggan yang dilayani");
+                    }
+                    break;
+
+                case 6:
+                    System.out.print("Masukkan No Antrian yang dicari: ");
+                    int nomor = Integer.parseInt(scanner.nextLine());
+                    queue.searchBuyer(nomor);
                     break;
 
                 case 0:
