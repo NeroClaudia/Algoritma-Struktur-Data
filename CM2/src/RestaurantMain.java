@@ -32,9 +32,9 @@ public class RestaurantMain {
                     Order order = new Order();
 
                     queue.enqueue(buyer, order);
-                    buyer.queueNumber = queue.queueCount;
+                    buyer.setQueueNumber(queue.getQueueCount());
 
-                    System.out.println("Antrian berhasil ditambahkan dengan nomor: " + buyer.queueNumber);
+                    System.out.println("Antrian berhasil ditambahkan dengan nomor: " + buyer.getQueueNumber());
                     break;
 
                 case 2:
@@ -58,13 +58,13 @@ public class RestaurantMain {
                         System.out.print("Price: ");
                         double price = Double.parseDouble(scanner.nextLine());
 
-                        served.order.addItem(orderCode, orderName, price);
-                        System.out.println(served.buyer.name + " telah memesan " + orderName);
+                        served.getOrder().addItem(orderCode, orderName, price);
+                        System.out.println(served.getBuyer().getName() + " telah memesan " + orderName);
                     }
                     break;
 
                 case 4:
-                    double totalBelanja = served.order.calculateTotal();
+                    double totalBelanja = served.getOrder().calculateTotal();
                     System.out.println("Total price for all orders: " + totalBelanja);
                     queue.displayReport();
                     break;
