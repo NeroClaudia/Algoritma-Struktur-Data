@@ -1,13 +1,18 @@
 public class Order {
 
-    OrderNode head, tail;
-    
-    Order() {
+    private OrderNode head;
+    private OrderNode tail;
+
+    public Order() {
         head = null;
         tail = null;
     }
 
-    void addItem(String orderCode, String orderName, double price) {
+    public OrderNode getHead() {
+        return head;
+    }
+
+    public void addItem(String orderCode, String orderName, double price) {
         OrderNode newNode = new OrderNode(orderCode, orderName, price);
 
         if (head == null) {
@@ -19,7 +24,7 @@ public class Order {
         }
     }
 
-    double calculateTotal() {
+    public double calculateTotal() {
         double total = 0;
         OrderNode current = head;
 
@@ -29,11 +34,12 @@ public class Order {
         }
         return total;
     }
-    
-    void displayItems() {
+
+    public void displayItems() {
         OrderNode current = head;
+
         while (current != null) {
-            System.out.printf("%-15s %-20s %-10d%n",
+            System.out.printf("$-15s %-20s %-10d%n",
                 current.orderCode,
                 current.orderName,
                 (int) current.price);
