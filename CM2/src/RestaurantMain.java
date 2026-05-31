@@ -18,15 +18,30 @@ public class RestaurantMain {
             System.out.println("0. Exit");
 
             System.out.print("Select Menu: ");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e) {
+                System.out.println("Inpur tidak valid. Masukkan angka");
+                choice = -1;
+            }
 
             switch (choice) {
                 case 1:
                     System.out.print("Buyer Name: ");
                     String pembeli = scanner.nextLine();
 
+                    if (pembeli.isEmpty()) {
+                        System.out.println("Nama tidak boleh kosong");
+                        break;
+                    }
+
                     System.out.print("No HP: ");
                     String noHp = scanner.nextLine();
+
+                    if (noHp.isEmpty()) {
+                        System.out.println("No HP tidak boleh kosong");
+                        break;
+                    }
 
                     Buyer buyer = new Buyer(pembeli, noHp);
                     Order order = new Order();
@@ -43,6 +58,12 @@ public class RestaurantMain {
 
                 case 3:
                     queue.displayQueue();
+
+                    if (queue.isEmpty()) {
+                        System.out.println("Tidak ada antrian untuk dihapus");
+                        break;
+                    }
+
                     System.out.print("Masukkan index yang ingin dihapus: ");
                     String targetCode = scanner.nextLine();
 
@@ -56,7 +77,13 @@ public class RestaurantMain {
                         String orderName = scanner.nextLine();
 
                         System.out.print("Price: ");
-                        double price = Double.parseDouble(scanner.nextLine());
+                        double price;
+                        try {
+                            price = Double.parseDouble(scanner.nextLine());
+                        }catch (NumberFormatException e) {
+                            System.out.println("Input harga tidak valid. Masukkan angka");
+                            break;
+                        }
 
                         served.getOrder().addItem(orderCode, orderName, price);
                         System.out.println(served.getBuyer().getName() + " telah memesan " + orderName);
@@ -64,6 +91,11 @@ public class RestaurantMain {
                     break;
 
                 case 4:
+                    if (served == null) {
+                        System.out.println("Belum ada pesanan diproses");
+                        break;
+                    }
+                    
                     double totalBelanja = served.getOrder().calculateTotal();
                     System.out.println("Total price for all orders: " + totalBelanja);
                     queue.displayReport();
