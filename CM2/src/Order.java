@@ -29,7 +29,7 @@ public class Order {
         OrderNode current = head;
 
         while (current != null) {
-            total += current.price;
+            total += current.getPrice();
             current = current.next;
         }
         return total;
@@ -40,9 +40,9 @@ public class Order {
 
         while (current != null) {
             System.out.printf("$-15s %-20s %-10d%n",
-                current.orderCode,
-                current.orderName,
-                (int) current.price);
+                current.getOrderCode(),
+                current.getOrderName(),
+                (int) current.getPrice());
             current = current.next;
         }
     }
