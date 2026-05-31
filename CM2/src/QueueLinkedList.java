@@ -1,10 +1,12 @@
 public class QueueLinkedList {
     
-    QueueNode head, tail;
-    QueueNode headReport, tailReport;
-    int queueCount;
+    private QueueNode head;
+    private QueueNode tail;
+    private QueueNode headReport;
+    private QueueNode tailReport;
+    private int queueCount;
 
-    QueueLinkedList() {
+    public QueueLinkedList() {
         head = null;
         tail = null;
         headReport = null;
@@ -12,11 +14,15 @@ public class QueueLinkedList {
         queueCount = 0;
     }
 
-    boolean isEmpty() {
+    public int getQueueCount() {
+        return queueCount;
+    }
+
+    public boolean isEmpty() {
         return head == null;
     }
 
-    void enqueue(Buyer buyer, Order order) {
+    public void enqueue(Buyer buyer, Order order) {
         QueueNode newNode = new QueueNode(buyer, order);
         if (isEmpty()) {
             head = tail = newNode;
@@ -28,7 +34,7 @@ public class QueueLinkedList {
         queueCount++;
     }
 
-    QueueNode dequeue(String orderCode) {
+    public QueueNode dequeue(String orderCode) {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
             return null;
@@ -37,7 +43,7 @@ public class QueueLinkedList {
         boolean found = false;
 
         while (temp != null) {
-            if (temp.order != null && temp.order.head != null && temp.order.head.orderCode.equalsIgnoreCase(orderCode)) {
+            if (temp.getOrder() != null && temp.getOrder().getHead() != null && temp.getOrder().getHead().getOrderCode().equalsIgnoreCase(orderCode)) {
                 found = true;
                 break;
             }
@@ -76,7 +82,7 @@ public class QueueLinkedList {
         return temp;
     }
 
-    void searchBuyer(int key) {
+    public void searchBuyer(int key) {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
             return;
@@ -90,11 +96,11 @@ public class QueueLinkedList {
         System.out.printf("%-15s %-20s %-15s%n", "No Antrian", "Nama", "No HP");
 
         while (current != null) {
-            if (current.buyer.queueNumber == key) {
+            if (current.getBuyer().getQueueNumber() == key) {
                 System.out.printf("%-15s %-20s %-15s%n", 
-                    current.buyer.queueNumber,
-                    current.buyer.name,
-                    current.buyer.mobileNumber);
+                    current.getBuyer().getQueueNumber(),
+                    current.getBuyer().getName(),
+                    current.getBuyer().getMobileNumber());
                 found = true;
                 break;
             }
@@ -106,7 +112,7 @@ public class QueueLinkedList {
         }
     }
 
-    void displayQueue() {
+    public void displayQueue() {
         if (isEmpty()) {
             System.out.println("Queue is Empty");
             return;
@@ -120,14 +126,14 @@ public class QueueLinkedList {
         QueueNode current = head;
         while (current != null) {
             System.out.printf("%-15d %-20s %-15s%n",
-                current.buyer.queueNumber,
-                current.buyer.name,
-                current.buyer.mobileNumber);
+                current.getBuyer().getQueueNumber(),
+                current.getBuyer().getName(),
+                current.getBuyer().getMobileNumber());
             current = current.next;
         }
     }
 
-    void displayReport() {
+    public void displayReport() {
         if (headReport == null) {
             System.out.println("Belum ada pesanan");
             return;
@@ -138,10 +144,10 @@ public class QueueLinkedList {
 
         QueueNode currentQueue = headReport;
         while (currentQueue != null) {
-            if (currentQueue.order != null) {
-                OrderNode currentItem = currentQueue.order.head;
+            if (currentQueue.getOrder() != null) {
+                OrderNode currentItem = currentQueue.getOrder().getHead();
                 while (currentItem != null) {
-                    OrderNode copy = new OrderNode(currentItem.orderCode, currentItem.orderName, currentItem.price);
+                    OrderNode copy = new OrderNode(currentItem.getOrderCode(), currentItem.getOrderName(), currentItem.getPrice());
                     if (sortHead == null) {
                         sortHead = sortTail = copy;
                     } else {
@@ -160,18 +166,18 @@ public class QueueLinkedList {
             swapped = false;
             OrderNode current = sortHead;
             while (current != null && current.next != null) {
-                if (current.orderName.compareTo(current.next.orderName) > 0) {
-                    String tempCode = current.orderCode;
-                    String tempName = current.orderName;
-                    double tempPrice = current.price;
+                if (current.getOrderName().compareTo(current.next.getOrderName()) > 0) {
+                    String tempCode = current.getOrderCode();
+                    String tempName = current.getOrderName();
+                    double tempPrice = current.getPrice();
 
-                    current.orderCode = current.next.orderCode;
-                    current.orderName = current.next.orderName;
-                    current.price     = current.next.price;
+                    current.setOrderCode(current.next.getOrderCode());
+                    current.setOrderName(current.next.getOrderName());
+                    current.setPrice(current.next.getPrice());
 
-                    current.next.orderCode = tempCode;
-                    current.next.orderName = tempName;
-                    current.next.price     = tempPrice;
+                    current.next.setOrderCode(tempCode);
+                    current.next.setOrderName(tempName);
+                    current.next.setPrice(tempPrice);
 
                     swapped = true;
                 }
@@ -188,11 +194,11 @@ public class QueueLinkedList {
         OrderNode current = sortHead;
         while (current != null) {
             System.out.printf("%-15s %-20s %-10d%n",
-                current.orderCode,
-                current.orderName,
-                (int) current.price);
+                current.getOrderCode(),
+                current.getOrderName(),
+                (int) current.getPrice());
             
-            totalPendapatanAll += current.price;
+            totalPendapatanAll += current.getPrice();
             current = current.next;
         }
         System.out.println("===================================");
