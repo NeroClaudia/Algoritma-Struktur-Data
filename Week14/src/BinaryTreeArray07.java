@@ -33,4 +33,23 @@ public class BinaryTreeArray07 {
             }
         }
     }
+
+    public void add(Student07 data) {
+        add(data, 0);
+    }
+
+    public void add(Student07 data, int idxCurrent) {
+        if (this.data[idxCurrent] == null) {
+            this.data[idxCurrent] = data;
+            if (idxCurrent > idxLast) {
+                idxLast = idxCurrent;
+            }
+        }else {
+            if (data.ipk < this.data[idxCurrent].ipk) {
+                add(data, 2 * idxCurrent + 1);
+            }else if (data.ipk > this.data[idxCurrent].ipk) {
+                add(data, 2 * idxCurrent + 2);
+            }
+        }
+    }
 }
