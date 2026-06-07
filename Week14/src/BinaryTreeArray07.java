@@ -21,4 +21,16 @@ public class BinaryTreeArray07 {
             }
         }
     }
+
+    public void displayStudentWithIPKAbove(double threshold, int idxStart) {
+        if (idxStart <= idxLast) {
+            if (data[idxStart] != null) {
+                displayStudentWithIPKAbove(threshold, 2 * idxStart + 1);
+                if (data[idxStart].ipk > threshold) {
+                    data[idxStart].print();
+                }
+                displayStudentWithIPKAbove(threshold, 2 * idxStart + 2);
+            }
+        }
+    }
 }
