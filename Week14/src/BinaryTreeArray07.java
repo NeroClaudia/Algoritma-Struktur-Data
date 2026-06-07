@@ -22,6 +22,16 @@ public class BinaryTreeArray07 {
         }
     }
 
+    public void traversePreOrder(int idxStart) {
+        if (idxStart <= idxLast) {
+            if (data[idxStart] != null) {
+                data[idxStart].print();
+                traversePreOrder(2 * idxStart + 1);
+                traversePreOrder(2 * idxStart + 2);
+            }
+        }
+    }
+
     public void displayStudentWithIPKAbove(double threshold, int idxStart) {
         if (idxStart <= idxLast) {
             if (data[idxStart] != null) {
