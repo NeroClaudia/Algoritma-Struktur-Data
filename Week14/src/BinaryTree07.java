@@ -175,4 +175,12 @@ public class BinaryTree07 {
         }
         current.data.print();
     }
+
+    public void getMaxIPK() {
+        Node07 current = root;
+        while (current.right != null) {
+            current = current.right;
+        }
+        current.data.print();
+    }
 }
