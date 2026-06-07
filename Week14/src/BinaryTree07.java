@@ -150,4 +150,21 @@ public class BinaryTree07 {
             successor.left = current.left;
         }
     }
+
+    public void addRekursif(Student07 data) {
+        root = addRekursif(root, data);
+    }
+
+    public Node07 addRekursif(Node07 current, Student07 data) {
+        if (current == null) {
+            return new Node07(data);
+        }else {
+            if (data.ipk < current.data.ipk) {
+                current.left = addRekursif(current.left, data);
+            }else if (data.ipk > current.data.ipk) {
+                current.right = addRekursif(current.right, data);
+            }
+        }
+        return current;
+    }
 }
