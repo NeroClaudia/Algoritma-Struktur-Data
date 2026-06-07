@@ -167,4 +167,12 @@ public class BinaryTree07 {
         }
         return current;
     }
+
+    public void getMinIPK() {
+        Node07 current = root;
+        while (current.left != null) {
+            current = current.left;
+        }
+        current.data.print();
+    }
 }
